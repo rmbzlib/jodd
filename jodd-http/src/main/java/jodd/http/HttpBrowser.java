@@ -26,6 +26,7 @@
 package jodd.http;
 
 import jodd.exception.ExceptionUtil;
+import jodd.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -298,6 +299,13 @@ public class HttpBrowser {
 
 		for (final Cookie cookie : httpRequest.cookies()) {
 			cookies.set(cookie.getName(),cookie);
+		}
+
+		if (StringUtil.isNotBlank(httpRequest.header("cookie"))) {
+			for (String cv: httpRequest.header("cookie").split(";")) {
+				Cookie cookie = new Cookie(cv);
+				cookies.set(cookie.getName(),cookie);
+			}
 		}
 
 		if (!cookies.isEmpty()) {
