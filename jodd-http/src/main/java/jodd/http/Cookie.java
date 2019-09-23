@@ -25,6 +25,7 @@
 
 package jodd.http;
 
+import jodd.util.StringPool;
 import jodd.util.StringUtil;
 
 /**
@@ -261,14 +262,22 @@ public class Cookie {
 	 * creation.
 	 */
 	public String getName() {
-		return name;
+		if (name == null) {
+			return StringPool.EMPTY;
+		} else {
+			return name;
+		}
 	}
 
 	/**
 	 * Returns the value of the cookie.
 	 */
 	public String getValue() {
-		return value;
+		if (value == null) {
+			return StringPool.EMPTY;
+		} else {
+			return value;
+		}
 	}
 
 	/**
